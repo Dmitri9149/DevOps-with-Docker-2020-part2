@@ -106,6 +106,8 @@ port_exercise_1  | > node index.js
 port_exercise_1  | 
 port_exercise_1  | Listening on port 80, this means inside of the container. Use -p to map the port to a port of your local machine.
 ```
+
+At port 80 : "Ports configured correctly!!"
 ------------------------------------------------------
 
 
