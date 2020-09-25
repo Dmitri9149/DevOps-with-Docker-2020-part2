@@ -1,4 +1,4 @@
-### The exarcises for the Part 2 of the course : 
+### The exercises for the Part 2 of the course : 
 
 ## DevOps with Docker , Helsinki University : https://devopswithdocker.com/part2/
 
