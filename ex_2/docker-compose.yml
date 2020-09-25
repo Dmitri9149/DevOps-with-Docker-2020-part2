@@ -6,3 +6,4 @@ services:
         image: devopsdockeruh/ports_exercise
         ports:
             - 80:80        
+        container_name: port_exercise      
