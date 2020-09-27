@@ -1,12 +1,10 @@
-FROM ubuntu:16.04
+# let us try from linux alpine
+FROM alpine
 
 WORKDIR /app_server
-RUN apt-get update && apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
-RUN apt install -y nodejs
-COPY package.json /app_server
-RUN npm install
-COPY . /app_server
+RUN apk add --no-cache git nodejs nodejs-npm \
+    && git clone https://github.com/docker-hy/backend-example-docker.git . \
+    && npm install
 EXPOSE 8000
 ENV FRONT_URL=http://127.0.0.1:5000
 CMD npm start 
