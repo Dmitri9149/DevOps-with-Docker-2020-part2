@@ -273,8 +273,83 @@ This exercise was created with Sasu Mäkinen
 
 Please return the used commands for this exercise.
 ---------------------------------------------------------
-
-
-
-
-
+```
+~>/scaling-exercise$ sudo docker-compose up --scale compute=2
+Creating load-balancer              ... done
+Creating scaling-exercise_compute_1 ... done
+Creating scaling-exercise_compute_2 ... done
+Creating calculator                 ... done
+Attaching to load-balancer, calculator, scaling-exercise_compute_1, scaling-exercise_compute_2
+load-balancer    | WARNING: /etc/nginx/dhparam/dhparam.pem was not found. A pre-generated dhparam.pem will be used for now while a new one
+load-balancer    | is being generated in the background.  Once the new dhparam.pem is in place, nginx will be reloaded.
+load-balancer    | forego     | starting dockergen.1 on port 5000
+load-balancer    | forego     | starting nginx.1 on port 5100
+load-balancer    | dockergen.1 | 2020/09/28 18:38:59 Generated '/etc/nginx/conf.d/default.conf' from 4 containers
+load-balancer    | dockergen.1 | 2020/09/28 18:38:59 Running 'nginx -s reload'
+load-balancer    | dockergen.1 | 2020/09/28 18:38:59 Watching docker events
+load-balancer    | dockergen.1 | 2020/09/28 18:38:59 Contents of /etc/nginx/conf.d/default.conf did not change. Skipping notification 'nginx -s reload'
+compute_2        | I just connected on port 3000!
+compute_1        | I just connected on port 3000!
+calculator       | 
+calculator       | > calc@1.0.0 start /usr/app
+calculator       | > serve -s -l 3000 dist
+calculator       | 
+calculator       | UPDATE AVAILABLE The latest version of `serve` is 11.3.2
+calculator       | INFO: Accepting connections at http://localhost:3000
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:22 +0000] "OPTIONS / HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:22 +0000] "OPTIONS / HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:22 +0000] "OPTIONS / HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:22 +0000] "OPTIONS / HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:22 +0000] "OPTIONS / HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:22 +0000] "OPTIONS / HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:22 +0000] "OPTIONS / HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:22 +0000] "OPTIONS / HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:22 +0000] "OPTIONS / HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:22 +0000] "OPTIONS / HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+compute_1        | Added to que
+compute_1        | Started resolving loop
+compute_1        | Started calculations for 3 + 3
+compute_2        | Added to que
+compute_2        | Started resolving loop
+compute_2        | Started calculations for 6 + 6
+compute_2        | Added to que
+compute_1        | Added to que
+compute_2        | Added to que
+compute_1        | Added to que
+compute_2        | Calculated 6 + 6: 12
+compute_2        | Started calculations for 4 + 4
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:25 +0000] "POST / HTTP/1.1" 200 40 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+compute_2        | Added to que
+compute_1        | Calculated 3 + 3: 6
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:25 +0000] "POST / HTTP/1.1" 200 39 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+compute_1        | Started calculations for 5 + 5
+compute_1        | Added to que
+compute_1        | Calculated 5 + 5: 10
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:28 +0000] "POST / HTTP/1.1" 200 40 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+compute_1        | Started calculations for 2 + 2
+compute_2        | Added to que
+compute_2        | Calculated 4 + 4: 8
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:29 +0000] "POST / HTTP/1.1" 200 39 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+compute_2        | Started calculations for 1 + 1
+compute_1        | Added to que
+compute_1        | Calculated 2 + 2: 4
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:32 +0000] "POST / HTTP/1.1" 200 39 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+compute_1        | Started calculations for 9 + 9
+compute_2        | Calculated 1 + 1: 2
+compute_2        | Started calculations for 7 + 7
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:32 +0000] "POST / HTTP/1.1" 200 39 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+compute_1        | Calculated 9 + 9: 18
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:36 +0000] "POST / HTTP/1.1" 200 40 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+compute_1        | Started calculations for 10 + 10
+compute_2        | Calculated 7 + 7: 14
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:36 +0000] "POST / HTTP/1.1" 200 40 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+compute_2        | Started calculations for 8 + 8
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:39 +0000] "POST / HTTP/1.1" 200 42 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+compute_1        | Calculated 10 + 10: 20
+compute_2        | Calculated 8 + 8: 16
+load-balancer    | nginx.1    | compute.localtest.me 172.22.0.1 - - [28/Sep/2020:18:39:40 +0000] "POST / HTTP/1.1" 200 40 "http://localhost:3000/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0"
+load-balancer    | 2020/09/28 18:40:30 [notice] 53#53: signal process started
+load-balancer    | Generating DH parameters, 2048 bit long safe prime, generator 2
+load-balancer    | This is going to take a long time
+load-balancer    | dhparam generation complete, reloading nginx
+```
