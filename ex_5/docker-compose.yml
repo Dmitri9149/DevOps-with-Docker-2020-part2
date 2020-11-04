@@ -1,0 +1,26 @@
+version: "3.3"
+
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: Dockerfile_f_end
+    ports:
+      - 5000:5000
+    environment:
+      - API_URL=http://localhost:8000
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile_b_end
+    ports:
+      - 8000:8000
+    environment:
+      - FRONT_URL=http://localhost:5000
+      - REDIS=redis
+    redis:
+      image: redis
+      restart: unless-stopped
+      container_name: rediscache
