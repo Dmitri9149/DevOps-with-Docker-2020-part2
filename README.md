@@ -844,6 +844,11 @@ backend     | ::ffff:172.25.0.1 - POST /messages HTTP/1.1 201 7 - 0.964 ms
 backend     | Executing (default): INSERT INTO "messages" ("id","body","created_at","updated_at") VALUES (DEFAULT,$1,$2,$3) RETURNING "id","body","created_at","updated_at";
 backend     | Executing (default): SELECT "id", "body", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "messages" AS "message";
 backend     | ::ffff:172.25.0.1 - GET /messages HTTP/1.1 200 747 - 11.230 ms
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping frontend    ... done
+Stopping backend     ... done
+Stopping redis       ... done
+Stopping postgres_db ... done
 ```
 -------------------------------------------------
 ---------------------------------------------------
