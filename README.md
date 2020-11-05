@@ -1782,3 +1782,7 @@ backend     | Got from redis pong
 backend     | ::ffff:172.23.0.1 - GET /slow HTTP/1.1 304 - - 6.832 ms
 
 ```
+Reply from server: "Press to Test!" "Working! It took 0.034 seconds".
+
+---------------------------------------
+-----------------------------------------
