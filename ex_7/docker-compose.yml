@@ -8,7 +8,7 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - training_data:/src/model
+      - model:/src/model
     depends_on:
       - training
   frontend:
@@ -25,10 +25,10 @@ services:
     container_name: training
     volumes:
       - images:/src/imgs
-      - training_data:/src/model
+      - model:/src/model
       - data:/src/data
     
 volumes:
   images:
-  training_data:
+  model:
   data:
