@@ -32,6 +32,8 @@ services:
     image: postgres
     restart: unless-stopped
     container_name: postgres
+    volumes: 
+      - ./database:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=name
       - POSTGRES_PASSWORD=password
