@@ -27,6 +27,9 @@ services:
     image: redis
     restart: unless-stopped
     container_name: redis
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - /tmp/redis_devops_data:/data
 
   postgres:
     image: postgres
