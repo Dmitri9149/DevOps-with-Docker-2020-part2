@@ -2,6 +2,10 @@
 
 ## DevOps with Docker , Helsinki University : https://devopswithdocker.com/part2/
 
+I used some tips from: https://github.com/aanykanen/docker-mooc-2020  
+and   
+https://github.com/riihikallio/docker
+
 -------------------------------------------------------
 2.1
 
@@ -1755,7 +1759,7 @@ backend exited with code 0
 frontend exited with code 0
 ~>/ex_10$ 
 ```
-#### All buttons are working ! 
+#### All buttons are working !!! (from initial configuration....)
 Part 1
 Exercise 1.10: Congratulations! You configured your ports correctly!
 Exercise 1.12: Working!
