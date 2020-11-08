@@ -1393,3 +1393,402 @@ backend exited with code 1
 frontend exited with code 0
 ~>/ex_9$ 
 ```
+---------------------------------------------------
+----------------------------------------------------
+
+2.10
+
+Some buttons may have stopped working in the frontend + backend project. Make sure that every button for exercises works.
+
+This may need a peek into the browsers developer consoles again like back part 1. The buttons of nginx exercise and the first button behave differently but you want them to match.
+
+If you had to do any changes explain what you had to change.
+
+Submit the docker-compose yml and both dockerfiles.
+---------------------------------------------
+----------------------------------------------
+```
+~>/ex_10$ sudo docker-compose build
+redis uses an image, skipping
+postgres uses an image, skipping
+proxy uses an image, skipping
+Building back
+Step 1/5 : FROM alpine
+ ---> d6e46aa2470d
+Step 2/5 : WORKDIR /usr/app
+ ---> Running in e058e5a45d74
+Removing intermediate container e058e5a45d74
+ ---> e1c5e147782f
+Step 3/5 : RUN apk add --no-cache git nodejs nodejs-npm &&     git clone https://github.com/docker-hy/backend-example-docker.git . &&     npm install
+ ---> Running in 3e56bb22bc63
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/community/x86_64/APKINDEX.tar.gz
+(1/13) Installing ca-certificates (20191127-r4)
+(2/13) Installing nghttp2-libs (1.41.0-r0)
+(3/13) Installing libcurl (7.69.1-r1)
+(4/13) Installing expat (2.2.9-r1)
+(5/13) Installing pcre2 (10.35-r0)
+(6/13) Installing git (2.26.2-r0)
+(7/13) Installing brotli-libs (1.0.9-r1)
+(8/13) Installing c-ares (1.16.1-r0)
+(9/13) Installing libgcc (9.3.0-r2)
+(10/13) Installing libstdc++ (9.3.0-r2)
+(11/13) Installing libuv (1.38.1-r0)
+(12/13) Installing nodejs (12.18.4-r0)
+(13/13) Installing npm (12.18.4-r0)
+Executing busybox-1.31.1-r19.trigger
+Executing ca-certificates-20191127-r4.trigger
+OK: 80 MiB in 27 packages
+Cloning into '.'...
+
+> nodemon@2.0.4 postinstall /usr/app/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+Love nodemon? You can now support the project via the open collective:
+ > https://opencollective.com/nodemon/donate
+
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.3 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+added 210 packages from 176 contributors and audited 211 packages in 8.452s
+
+10 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+Removing intermediate container 3e56bb22bc63
+ ---> b94c752d7d5b
+Step 4/5 : EXPOSE 8000
+ ---> Running in d3b46a9dd3a8
+Removing intermediate container d3b46a9dd3a8
+ ---> d15f529ec991
+Step 5/5 : CMD npm start
+ ---> Running in 9defd47da3f1
+Removing intermediate container 9defd47da3f1
+ ---> 59fbcd1ca747
+
+Successfully built 59fbcd1ca747
+Successfully tagged ex_10_back:latest
+Building front
+Step 1/5 : FROM alpine
+ ---> d6e46aa2470d
+Step 2/5 : WORKDIR /usr/app
+ ---> Using cache
+ ---> e1c5e147782f
+Step 3/5 : RUN apk add --no-cache git nodejs nodejs-npm &&     git clone https://github.com/docker-hy/frontend-example-docker.git . &&     npm install
+ ---> Running in 8869ccb46b1c
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/community/x86_64/APKINDEX.tar.gz
+(1/13) Installing ca-certificates (20191127-r4)
+(2/13) Installing nghttp2-libs (1.41.0-r0)
+(3/13) Installing libcurl (7.69.1-r1)
+(4/13) Installing expat (2.2.9-r1)
+(5/13) Installing pcre2 (10.35-r0)
+(6/13) Installing git (2.26.2-r0)
+(7/13) Installing brotli-libs (1.0.9-r1)
+(8/13) Installing c-ares (1.16.1-r0)
+(9/13) Installing libgcc (9.3.0-r2)
+(10/13) Installing libstdc++ (9.3.0-r2)
+(11/13) Installing libuv (1.38.1-r0)
+(12/13) Installing nodejs (12.18.4-r0)
+(13/13) Installing npm (12.18.4-r0)
+Executing busybox-1.31.1-r19.trigger
+Executing ca-certificates-20191127-r4.trigger
+OK: 80 MiB in 27 packages
+Cloning into '.'...
+
+> core-js@2.6.11 postinstall /usr/app/node_modules/core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+Thank you for using core-js ( https://github.com/zloirock/core-js ) for polyfilling JavaScript standard library!
+
+The project needs your help! Please consider supporting of core-js on Open Collective or Patreon: 
+> https://opencollective.com/core-js 
+> https://www.patreon.com/zloirock 
+
+Also, the author of core-js ( https://github.com/zloirock ) is looking for a good job -)
+
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.12 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.12: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+added 1462 packages from 472 contributors and audited 1532 packages in 47.892s
+
+28 packages are looking for funding
+  run `npm fund` for details
+
+found 271 vulnerabilities (263 low, 2 moderate, 6 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+Removing intermediate container 8869ccb46b1c
+ ---> f64eb950584a
+Step 4/5 : EXPOSE 5000
+ ---> Running in 263c072b8b2e
+Removing intermediate container 263c072b8b2e
+ ---> 3adb2e93af0a
+Step 5/5 : CMD npm start
+ ---> Running in 377af09df9bd
+Removing intermediate container 377af09df9bd
+ ---> fd3f8f7a4e1c
+
+Successfully built fd3f8f7a4e1c
+Successfully tagged ex_10_front:latest
+~>/ex_10$ sudo docker-compose up
+Creating backend  ... done
+Creating frontend ... done
+Creating redis    ... done
+Creating postgres ... done
+Creating nginx    ... done
+Attaching to redis, backend, postgres, frontend, nginx
+frontend    | 
+frontend    | > frontend-example-docker@1.0.0 start /usr/app
+frontend    | > webpack --mode production && serve -s -l 5000 dist
+frontend    | 
+nginx       | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx       | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx       | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+postgres    | 
+postgres    | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres    | 
+postgres    | 2020-11-08 13:03:12.885 UTC [1] LOG:  starting PostgreSQL 13.0 (Debian 13.0-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+postgres    | 2020-11-08 13:03:12.891 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres    | 2020-11-08 13:03:12.891 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres    | 2020-11-08 13:03:12.912 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres    | 2020-11-08 13:03:12.923 UTC [25] LOG:  database system was shut down at 2020-11-08 12:21:17 UTC
+postgres    | 2020-11-08 13:03:12.972 UTC [1] LOG:  database system is ready to accept connections
+redis       | 1:C 08 Nov 2020 13:03:12.311 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis       | 1:C 08 Nov 2020 13:03:12.311 # Redis version=6.0.9, bits=64, commit=00000000, modified=0, pid=1, just started
+redis       | 1:C 08 Nov 2020 13:03:12.311 # Configuration loaded
+redis       | 1:M 08 Nov 2020 13:03:12.315 * Running mode=standalone, port=6379.
+redis       | 1:M 08 Nov 2020 13:03:12.316 # Server initialized
+redis       | 1:M 08 Nov 2020 13:03:12.316 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis       | 1:M 08 Nov 2020 13:03:12.317 * DB loaded from append only file: 0.001 seconds
+redis       | 1:M 08 Nov 2020 13:03:12.317 * Ready to accept connections
+nginx       | 10-listen-on-ipv6-by-default.sh: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx       | 10-listen-on-ipv6-by-default.sh: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx       | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx       | /docker-entrypoint.sh: Configuration complete; ready for start up
+backend     | 
+backend     | > backend-example-docker@1.0.0 start /usr/app
+backend     | > node index.js
+backend     | 
+backend     | ENV values set as follows: {
+backend     |   DB: {
+backend     |     username: 'name',
+backend     |     password: 'password',
+backend     |     database: 'messages',
+backend     |     host: 'postgres'
+backend     |   },
+backend     |   PORT: 8000,
+backend     |   FRONT_URL: 'http://localhost',
+backend     |   REDIS: 'redis',
+backend     |   REDIS_PORT: 6379
+backend     | }
+backend     | Testing database connection
+backend     | Redis connection, initating..
+backend     | Trying to set cache
+backend     | Cache set successfully
+backend     | Started on port 8000
+backend     | Executing (default): SELECT 1+1 AS result
+backend     | Connection ok, syncing database with model.
+backend     | Executing (default): CREATE TABLE IF NOT EXISTS "messages" ("id"   SERIAL , "body" VARCHAR(255), "created_at" TIMESTAMP WITH TIME ZONE NOT NULL, "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+backend     | Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'messages' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+backend     | Database connection established!
+frontend    | Browserslist: caniuse-lite is outdated. Please run:
+frontend    | npx browserslist@latest --update-db
+frontend    | Browserslist: caniuse-lite is outdated. Please run:
+frontend    | npx browserslist@latest --update-db
+frontend    | Hash: 5e72b9e8a4c537ea2c72
+frontend    | Version: webpack 4.42.1
+frontend    | Time: 41504ms
+frontend    | Built at: 11/08/2020 1:03:57 PM
+frontend    |                                  Asset       Size  Chunks                    Chunk Names
+frontend    | 0ab54153eeeca0ce03978cc463b257f7.woff2   39.2 KiB          [emitted]         
+frontend    |   13db00b7a34fee4d819ab7f9838cc428.eot   96.3 KiB          [emitted]         
+frontend    |   701ae6abd4719e9c2ada3535a497b341.eot   30.4 KiB          [emitted]         
+frontend    |   82f60bd0b94a1ed68b1e6e309ce2e8c3.svg    105 KiB          [emitted]         
+frontend    |   8e3c7f5520f5ae906c6cf6d7f3ddcd19.eot    104 KiB          [emitted]         
+frontend    |   962a1bf31c081691065fe333d9fa8105.svg    382 KiB          [emitted]  [big]  
+frontend    |   9c74e172f87984c48ddf5c8108cabe67.png   27.5 KiB          [emitted]         
+frontend    |  a046592bac8f2fd96e994733faf3858c.woff   62.2 KiB          [emitted]         
+frontend    |   a1a749e89f578a49306ec2b055c073da.svg    496 KiB          [emitted]  [big]  
+frontend    |   a3e2211dddcba197b5bbf2aa9d5d9a9a.svg   3.19 KiB          [emitted]         
+frontend    |   ad97afd3337e8cda302d10ff5a4026b8.ttf   30.2 KiB          [emitted]         
+frontend    |   b87b9ba532ace76ae9f6edfe9f72ded2.ttf    103 KiB          [emitted]         
+frontend    |   bff6c47a9da5c7cfa2e8a552e2df3a78.svg    3.2 KiB          [emitted]         
+frontend    |   c5ebe0b32dc1b5cc449a76c4204d13bb.ttf   96.1 KiB          [emitted]         
+frontend    | cd6c777f1945164224dee082abaea03a.woff2     12 KiB          [emitted]         
+frontend    | e8c322de9658cbeb8a774b6624167c2c.woff2   53.2 KiB          [emitted]         
+frontend    |  ef60a4f6c25ef7f39f2d25a748dbecfe.woff   14.4 KiB          [emitted]         
+frontend    |  faff92145777a3cbaf8e7367b4807987.woff   49.3 KiB          [emitted]         
+frontend    |                             index.html  454 bytes          [emitted]         
+frontend    |                               main.css  127 bytes       0  [emitted]         main
+frontend    |                                main.js   21.8 KiB       0  [emitted]         main
+frontend    |                     vendors~main-1.css    602 KiB       1  [emitted]  [big]  vendors~main
+frontend    |                        vendors~main.js    342 KiB       1  [emitted]  [big]  vendors~main
+frontend    |            vendors~main.js.LICENSE.txt   1.37 KiB          [emitted]         
+frontend    | Entrypoint main [big] = vendors~main-1.css vendors~main.js main.css main.js
+frontend    |   [7] ./node_modules/semantic-ui-react/dist/es/lib/index.js + 1 modules 2.94 KiB {1} [built]
+frontend    |       |    2 modules
+frontend    |  [51] ./node_modules/semantic-ui-react/dist/es/elements/Icon/Icon.js + 1 modules 6.22 KiB {1} [built]
+frontend    |       |    2 modules
+frontend    |  [80] ./node_modules/react-redux/es/index.js + 19 modules 37 KiB {1} [built]
+frontend    |       |    20 modules
+frontend    |  [93] ./node_modules/semantic-ui-react/dist/es/elements/Label/Label.js + 2 modules 10.6 KiB {1} [built]
+frontend    |       |    3 modules
+frontend    | [212] (webpack)/buildin/global.js 472 bytes {1} [built]
+frontend    | [251] ./src/assets/toscalogo_color.svg 82 bytes {0} [built]
+frontend    | [252] ./src/assets/toscalogo_grayscale.svg 82 bytes {0} [built]
+frontend    | [270] multi @babel/polyfill ./src 40 bytes {0} [built]
+frontend    | [464] (webpack)/buildin/harmony-module.js 573 bytes {1} [built]
+frontend    | [466] ./src/assets/custom.css 39 bytes {0} [built]
+frontend    | [602] ./src/index.js + 18 modules 42.1 KiB {0} [built]
+frontend    |       | ./src/index.js 609 bytes [built]
+frontend    |       | ./src/util/store.js 481 bytes [built]
+frontend    |       | ./util/common.js 117 bytes [built]
+frontend    |       | ./src/util/apiConnection.js 4.57 KiB [built]
+frontend    |       | ./src/util/redux/index.js 219 bytes [built]
+frontend    |       | ./src/util/redux/messageReducer.js 2.15 KiB [built]
+frontend    |       | ./src/util/redux/simpleReducer.js 1.86 KiB [built]
+frontend    |       | ./src/util/common.js 221 bytes [built]
+frontend    |       |     + 11 hidden modules
+frontend    | [603] ./node_modules/semantic-ui-react/dist/es/elements/Button/Button.js + 3 modules 17.7 KiB {1} [built]
+frontend    |       |    4 modules
+frontend    | [612] ./node_modules/react-router-dom/es/BrowserRouter.js + 12 modules 41 KiB {1} [built]
+frontend    |       |    13 modules
+frontend    | [614] ./node_modules/react-router-dom/es/Switch.js + 1 modules 3.35 KiB {1} [built]
+frontend    |       |    2 modules
+frontend    | [615] ./node_modules/react-router-dom/es/Route.js + 1 modules 5.9 KiB {1} [built]
+frontend    |       |    2 modules
+frontend    |     + 989 hidden modules
+frontend    | 
+frontend    | WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+frontend    | This can impact web performance.
+frontend    | Assets: 
+frontend    |   962a1bf31c081691065fe333d9fa8105.svg (382 KiB)
+frontend    |   a1a749e89f578a49306ec2b055c073da.svg (496 KiB)
+frontend    |   vendors~main-1.css (602 KiB)
+frontend    |   vendors~main.js (342 KiB)
+frontend    | 
+frontend    | WARNING in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+frontend    | Entrypoints:
+frontend    |   main (966 KiB)
+frontend    |       vendors~main-1.css
+frontend    |       vendors~main.js
+frontend    |       main.css
+frontend    |       main.js
+frontend    | 
+frontend    | 
+frontend    | WARNING in webpack performance recommendations: 
+frontend    | You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+frontend    | For more info visit https://webpack.js.org/guides/code-splitting/
+frontend    | Child html-webpack-plugin for "index.html":
+frontend    |      1 asset
+frontend    |     Entrypoint undefined = index.html
+frontend    |     [2] (webpack)/buildin/global.js 472 bytes {0} [built]
+frontend    |     [3] (webpack)/buildin/module.js 497 bytes {0} [built]
+frontend    |         + 2 hidden modules
+frontend    | Child mini-css-extract-plugin node_modules/css-loader/index.js!node_modules/semantic-ui-css/semantic.min.css:
+frontend    |     Entrypoint mini-css-extract-plugin = *
+frontend    |        19 modules
+frontend    | Child mini-css-extract-plugin node_modules/css-loader/index.js!src/assets/custom.css:
+frontend    |     Entrypoint mini-css-extract-plugin = *
+frontend    |     [0] ./node_modules/css-loader!./src/assets/custom.css 340 bytes {0} [built]
+frontend    |         + 1 hidden module
+frontend    | UPDATE AVAILABLE The latest version of `serve` is 11.3.2
+frontend    | INFO: Accepting connections at http://localhost:5000
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:06:51 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:06:51 +0000] "GET /vendors~main-1.css HTTP/1.1" 304 0 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:06:51 +0000] "GET /main.css HTTP/1.1" 304 0 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:06:51 +0000] "GET /vendors~main.js HTTP/1.1" 304 0 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:06:51 +0000] "GET /main.js HTTP/1.1" 304 0 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:06:51 +0000] "GET /a3e2211dddcba197b5bbf2aa9d5d9a9a.svg HTTP/1.1" 304 0 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:06:51 +0000] "GET /favicon.ico HTTP/1.1" 304 0 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | Got from redis pong
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:06:55 +0000] "GET /api/slow HTTP/1.1" 200 4 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | ::ffff:192.168.16.6 - GET /slow HTTP/1.0 200 4 - 10.799 ms
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:06:59 +0000] "GET /api/ping HTTP/1.1" 304 0 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | ::ffff:192.168.16.6 - GET /ping HTTP/1.0 304 - - 1.024 ms
+backend     | ::ffff:192.168.16.6 - GET /ping HTTP/1.0 304 - - 0.718 ms
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:07:01 +0000] "GET /api/ping HTTP/1.1" 304 0 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:07:41 +0000] "POST /api/messages HTTP/1.1" 201 7 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | ::ffff:192.168.16.6 - POST /messages HTTP/1.0 201 7 - 10.837 ms
+backend     | Executing (default): INSERT INTO "messages" ("id","body","created_at","updated_at") VALUES (DEFAULT,$1,$2,$3) RETURNING "id","body","created_at","updated_at";
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:07:41 +0000] "POST /api/messages HTTP/1.1" 201 7 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | ::ffff:192.168.16.6 - POST /messages HTTP/1.0 201 7 - 2.376 ms
+backend     | Executing (default): INSERT INTO "messages" ("id","body","created_at","updated_at") VALUES (DEFAULT,$1,$2,$3) RETURNING "id","body","created_at","updated_at";
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:07:41 +0000] "POST /api/messages HTTP/1.1" 201 7 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | ::ffff:192.168.16.6 - POST /messages HTTP/1.0 201 7 - 1.977 ms
+backend     | Executing (default): INSERT INTO "messages" ("id","body","created_at","updated_at") VALUES (DEFAULT,$1,$2,$3) RETURNING "id","body","created_at","updated_at";
+backend     | ::ffff:192.168.16.6 - POST /messages HTTP/1.0 201 7 - 1.688 ms
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:07:42 +0000] "POST /api/messages HTTP/1.1" 201 7 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | Executing (default): INSERT INTO "messages" ("id","body","created_at","updated_at") VALUES (DEFAULT,$1,$2,$3) RETURNING "id","body","created_at","updated_at";
+backend     | ::ffff:192.168.16.6 - POST /messages HTTP/1.0 201 7 - 1.917 ms
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:07:42 +0000] "POST /api/messages HTTP/1.1" 201 7 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | Executing (default): INSERT INTO "messages" ("id","body","created_at","updated_at") VALUES (DEFAULT,$1,$2,$3) RETURNING "id","body","created_at","updated_at";
+backend     | ::ffff:192.168.16.6 - POST /messages HTTP/1.0 201 7 - 1.659 ms
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:07:42 +0000] "POST /api/messages HTTP/1.1" 201 7 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | Executing (default): INSERT INTO "messages" ("id","body","created_at","updated_at") VALUES (DEFAULT,$1,$2,$3) RETURNING "id","body","created_at","updated_at";
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:07:42 +0000] "POST /api/messages HTTP/1.1" 201 7 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | ::ffff:192.168.16.6 - POST /messages HTTP/1.0 201 7 - 1.400 ms
+backend     | Executing (default): INSERT INTO "messages" ("id","body","created_at","updated_at") VALUES (DEFAULT,$1,$2,$3) RETURNING "id","body","created_at","updated_at";
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:07:42 +0000] "POST /api/messages HTTP/1.1" 201 7 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | ::ffff:192.168.16.6 - POST /messages HTTP/1.0 201 7 - 1.744 ms
+backend     | Executing (default): INSERT INTO "messages" ("id","body","created_at","updated_at") VALUES (DEFAULT,$1,$2,$3) RETURNING "id","body","created_at","updated_at";
+backend     | Executing (default): SELECT "id", "body", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "messages" AS "message";
+nginx       | 192.168.16.1 - - [08/Nov/2020:13:07:43 +0000] "GET /api/messages HTTP/1.1" 200 3068 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
+backend     | ::ffff:192.168.16.6 - GET /messages HTTP/1.0 200 3068 - 18.074 ms
+redis       | 1:signal-handler (1604841135) Received SIGTERM scheduling shutdown...
+postgres    | 2020-11-08 13:12:15.840 UTC [1] LOG:  received fast shutdown request
+postgres    | 2020-11-08 13:12:15.843 UTC [1] LOG:  aborting any active transactions
+postgres    | 2020-11-08 13:12:15.845 UTC [1] LOG:  background worker "logical replication launcher" (PID 31) exited with exit code 1
+postgres    | 2020-11-08 13:12:15.851 UTC [26] LOG:  shutting down
+postgres    | 2020-11-08 13:12:15.898 UTC [1] LOG:  database system is shut down
+redis       | 1:M 08 Nov 2020 13:12:15.934 # User requested shutdown...
+redis       | 1:M 08 Nov 2020 13:12:15.934 * Calling fsync() on the AOF file.
+redis       | 1:M 08 Nov 2020 13:12:15.934 # Redis is now ready to exit, bye bye...
+redis exited with code 0
+postgres exited with code 0
+nginx exited with code 0
+frontend    | 
+frontend    | INFO: Gracefully shutting down. Please wait...
+backend exited with code 0
+frontend exited with code 0
+~>/ex_10$ 
+```
+#### All buttons are working ! 
+Part 1
+Exercise 1.10: Congratulations! You configured your ports correctly!
+Exercise 1.12: Working!
+Part 2
+Exercise 2.5: Working! It took 0.049 seconds.
+Exercise 2.6:
+Hello from EX_10 !!!
+Hello !
+Hello !
+Hello !
+Hello !
+Hello !
+Hello !
+Hello !
+Hello !
+Hello !
+Hello !
+Hello from EX_10 !!!
+Hello from EX_10 !!!
+Hello from EX_10 !!!
+Hello from EX_10 !!!
+Hello from EX_10 !!!
+Hello from EX_10 !!!
+Hello from EX_10 !!!
+Hello from EX_10 !!!
+New message : hello!
+New message : hello!
+New message : hello!
+New message : hello!
+New new message : hello!
+New new message : hello!
+New new message : hello!
+New new message : hello!
+New new message : hello!
+Exercise 2.8: Working!
+
