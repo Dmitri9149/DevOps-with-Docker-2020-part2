@@ -1,8 +1,9 @@
 # temp files
 
 temp.txt
+/tmp/pg_devops_data
 
-https://github.com/atlassian/docker/blob/master/.gitignore
+## https://github.com/atlassian/docker/blob/master/.gitignore
 
 # Docker project generated files to ignore
 #  if you want to ignore files created by your editor/tools,
