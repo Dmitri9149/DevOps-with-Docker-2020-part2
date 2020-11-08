@@ -877,7 +877,7 @@ Submit the docker-compose.yml
 
 This exercise was created by Sasu Mäkinen
 -------------------------------------------------
---------------------------------------------------
+--------------------------------------------------git 
 
 2.8
 
@@ -1783,6 +1783,7 @@ frontend exited with code 0
 ~>/ex_10$ 
 ```
 #### All buttons are working !!! (from initial configuration....)
+```
 Part 1
 Exercise 1.10: Congratulations! You configured your ports correctly!
 Exercise 1.12: Working!
@@ -1818,4 +1819,4 @@ New new message : hello!
 New new message : hello!
 New new message : hello!
 Exercise 2.8: Working!
-
+```
