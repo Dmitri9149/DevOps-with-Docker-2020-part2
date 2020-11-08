@@ -1,0 +1,49 @@
+version: "3.5"
+
+services:
+
+  back:
+    container_name: backend
+    build: back/
+    volumes:
+      - ./logs.txt:/usr/app/logs.txt
+    environment:
+      - FRONT_URL=http://localhost
+      - REDIS=redis
+      - DB_USERNAME=name
+      - DB_PASSWORD=password
+      - DB_NAME=messages
+      - DB_HOST=postgres
+
+  front:
+    build: front/
+    ports:
+      - 5000:5000
+    container_name: frontend
+    environment:
+      - API_URL=http://localhost/api
+
+  redis:
+    image: redis
+    restart: unless-stopped
+    container_name: redis
+
+  postgres:
+    image: postgres
+    restart: unless-stopped
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=name
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=messages
+
+  proxy:
+    image: nginx
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - front
+      - back
