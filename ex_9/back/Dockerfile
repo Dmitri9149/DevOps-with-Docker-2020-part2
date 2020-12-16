@@ -12,5 +12,5 @@ RUN apk add --no-cache git nodejs nodejs-npm && \
 
 EXPOSE 8000
 
-CMD npm start
+CMD ["npm", "start"]
  
